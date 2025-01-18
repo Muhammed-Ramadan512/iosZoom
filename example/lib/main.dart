@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gr_zoom/gr_zoom.dart';
 
@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({Key key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -31,8 +31,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _grZoomPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _grZoomPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
