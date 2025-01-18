@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 import MobileRTC
 
-public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , MobileRTCMeetingServiceDelegate {
+public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , MobileRTCMeetingServiceDelegate{
   struct MeetingViewOptions { 
     static let NO_BUTTON_AUDIO = 2
     static let NO_BUTTON_LEAVE = 128
@@ -30,8 +30,69 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
 
   override init(){
     authenticationDelegate = AuthenticationDelegate()
+      super.init()
+
+          // Add observers for screenshot and screen recording
+          NotificationCenter.default.addObserver(self, selector: #selector(handleScreenshot), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+
+          if #available(iOS 11.0, *) {
+            UIScreen.main.addObserver(self, forKeyPath: "isCaptured", options: [.new], context: nil)
+          }
   }
 
+    deinit {
+      NotificationCenter.default.removeObserver(self, name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+
+      if #available(iOS 11.0, *) {
+        UIScreen.main.removeObserver(self, forKeyPath: "isCaptured")
+      }
+    }
+    
+    @objc private func handleScreenshot() {
+      showAlert(title: "تحذير", message: "لقد قمت بأخذ لقطة للشاشة")
+      sendEventToFlutter(event: ["type": "screenshot_detected"])
+        exitApplication()
+
+    }
+
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+      if keyPath == "isCaptured" {
+        if let isCaptured = change?[.newKey] as? Bool {
+            if isCaptured {
+                showAlert(title: "تحذير", message: "لقد قمت بتسجيل الشاشة")
+                sendEventToFlutter(event: ["type": "screen_recording", "isCaptured": isCaptured])
+                exitApplication()
+            }
+          
+        }
+      }
+    }
+    
+    private func sendEventToFlutter(event: [String: Any]) {
+      if let sink = eventSink {
+        sink(event)
+      }
+    }
+
+    private func showAlert(title: String, message: String) {
+      DispatchQueue.main.async {
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+          let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: "حسنا", style: .default, handler: nil))
+          rootViewController.present(alert, animated: true, completion: nil)
+        }
+      }
+    }
+    private func exitApplication() {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+          exit(0)
+        }
+      }
+    }
+    
+    
 
  
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -83,6 +144,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
         if let jwtToken = arguments["jwtToken"] {
             auth?.jwtToken = jwtToken
         }
+       
         
         auth?.sdkAuth()
     }
