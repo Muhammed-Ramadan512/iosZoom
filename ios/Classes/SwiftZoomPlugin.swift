@@ -17,7 +17,8 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
   }
 
   var authenticationDelegate: AuthenticationDelegate
-  var eventSink: FlutterEventSink? 
+  var eventSink: FlutterEventSink?
+    var isObserved: Bool = false
   public static func register(with registrar: FlutterPluginRegistrar) {
     let messenger = registrar.messenger()
     let channel = FlutterMethodChannel(name: "plugins.webcare/zoom_channel", binaryMessenger: messenger)
@@ -32,13 +33,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
     authenticationDelegate = AuthenticationDelegate()
       super.init()
 
-          // Add observers for screenshot and screen recording
-          NotificationCenter.default.addObserver(self, selector: #selector(handleScreenshot), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
-
-          if #available(iOS 11.0, *) {
-              NotificationCenter.default.addObserver(self, selector: #selector(screenCaptureChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
-
-          }
+         
   }
 
     deinit {
@@ -144,7 +139,6 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
         if let jwtToken = arguments["jwtToken"] {
             auth?.jwtToken = jwtToken
         }
-       
         
         auth?.sdkAuth()
     }
@@ -162,6 +156,18 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
     }
     
     public func joinMeeting(call: FlutterMethodCall, result: FlutterResult) {
+        
+        
+        if !isObserved {
+            // Add observers for screenshot and screen recording
+            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenshot), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+
+            if #available(iOS 11.0, *) {
+                NotificationCenter.default.addObserver(self, selector: #selector(screenCaptureChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
+
+            }
+            
+        }
         
         let meetingService = MobileRTC.shared().getMeetingService()
         let meetingSettings = MobileRTC.shared().getMeetingSettings()
@@ -228,6 +234,18 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
     }
 
     public func startMeeting(call: FlutterMethodCall, result: FlutterResult) {
+        
+        
+        if !isObserved {
+            // Add observers for screenshot and screen recording
+            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenshot), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+
+            if #available(iOS 11.0, *) {
+                NotificationCenter.default.addObserver(self, selector: #selector(screenCaptureChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
+
+            }
+            
+        }
         
         let meetingService = MobileRTC.shared().getMeetingService()
         let meetingSettings = MobileRTC.shared().getMeetingSettings()
