@@ -36,16 +36,17 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
           NotificationCenter.default.addObserver(self, selector: #selector(handleScreenshot), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
 
           if #available(iOS 11.0, *) {
-            UIScreen.main.addObserver(self, forKeyPath: "isCaptured", options: [.new], context: nil)
+              NotificationCenter.default.addObserver(self, selector: #selector(screenCaptureChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
+
           }
   }
 
     deinit {
       NotificationCenter.default.removeObserver(self, name: UIApplication.userDidTakeScreenshotNotification, object: nil)
 
-      if #available(iOS 11.0, *) {
-        UIScreen.main.removeObserver(self, forKeyPath: "isCaptured")
-      }
+        if #available(iOS 11.0, *) {
+                   NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
+               }
     }
     
     @objc private func handleScreenshot() {
@@ -54,19 +55,18 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
         exitApplication()
 
     }
-
-    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-      if keyPath == "isCaptured" {
-        if let isCaptured = change?[.newKey] as? Bool {
-            if isCaptured {
-                showAlert(title: "تحذير", message: "لقد قمت بتسجيل الشاشة")
-                sendEventToFlutter(event: ["type": "screen_recording", "isCaptured": isCaptured])
-                exitApplication()
+    
+    @objc private func screenCaptureChanged() {
+            if #available(iOS 11.0, *) {
+                let isCaptured = UIScreen.main.isCaptured
+                if isCaptured {
+                    showAlert(title: "تحذير", message: "لقد قمت بتسجيل الشاشة")
+                    sendEventToFlutter(event: ["type": "screen_recording", "isCaptured": isCaptured])
+                    exitApplication()
+                }
+                // Handle the screen capture status change here
             }
-          
         }
-      }
-    }
     
     private func sendEventToFlutter(event: [String: Any]) {
       if let sink = eventSink {
