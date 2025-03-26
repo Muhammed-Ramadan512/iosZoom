@@ -2,8 +2,13 @@ class ZoomOptions {
   String domain;
   String? jwtToken;
   bool? customAndroidUi;
+  String? disableInviteUrl;
 
-  ZoomOptions({required this.domain, this.jwtToken, this.customAndroidUi});
+  ZoomOptions(
+      {required this.domain,
+      this.jwtToken,
+      this.customAndroidUi,
+      this.disableInviteUrl});
 }
 
 class ZoomMeetingOptions {
@@ -32,6 +37,7 @@ class ZoomMeetingOptions {
   String noAudio;
   int? meetingViewOptions;
   String? meetingName;
+  String? disableInviteUrl;
 
   ZoomMeetingOptions({
     required this.userId,
@@ -47,6 +53,7 @@ class ZoomMeetingOptions {
     required this.noDisconnectAudio,
     required this.noAudio,
     this.meetingViewOptions,
-    this.meetingName
+    this.meetingName,
+    this.disableInviteUrl,
   });
 }

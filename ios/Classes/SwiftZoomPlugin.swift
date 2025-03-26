@@ -181,7 +181,8 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.setAutoConnectInternetAudio(parseBoolean(data: arguments["noDisconnectAudio"]!, defaultValue: false))
             meetingSettings?.setMuteAudioWhenJoinMeeting(parseBoolean(data: arguments["noAudio"]!, defaultValue: false))
             meetingSettings?.meetingShareHidden = parseBoolean(data: arguments["disableShare"]!, defaultValue: false)
-            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableDrive"]!, defaultValue: false)
+            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableInvite"]!, defaultValue: false)
+            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableInviteUrl"]!, defaultValue: false)
             if  arguments["meetingViewOptions"] != nil{
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_AUDIO) != 0 {
@@ -259,7 +260,8 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.setAutoConnectInternetAudio(parseBoolean(data: arguments["noDisconnectAudio"]!, defaultValue: false))
             meetingSettings?.setMuteAudioWhenJoinMeeting(parseBoolean(data: arguments["noAudio"]!, defaultValue: false))
             meetingSettings?.meetingShareHidden = parseBoolean(data: arguments["disableShare"]!, defaultValue: false)
-            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableDrive"]!, defaultValue: false)
+            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableInvite"]!, defaultValue: false)
+            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableInviteUrl"]!, defaultValue: false)
             if  arguments["meetingViewOptions"] != nil{
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)   
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_AUDIO) != 0 {

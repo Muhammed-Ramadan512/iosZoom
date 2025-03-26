@@ -20,6 +20,11 @@ class MethodChannelZoom extends ZoomPlatform {
           ? "true"
           : "false",
     );
+    if (options.disableInviteUrl != null) {
+      optionMap.putIfAbsent(
+          "disableInviteUrl", () => options.disableInviteUrl!.toString());
+    }
+
     optionMap.putIfAbsent("domain", () => options.domain);
     return channel
         .invokeMethod<List>('init', optionMap)
@@ -43,6 +48,10 @@ class MethodChannelZoom extends ZoomPlatform {
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
     optionMap.putIfAbsent("noAudio", () => options.noAudio);
     optionMap.putIfAbsent("meetingName", () => options.meetingName ?? "");
+    if (options.disableInviteUrl != null) {
+      optionMap.putIfAbsent(
+          "disableInviteUrl", () => options.disableInviteUrl!.toString());
+    }
 
     if (options.meetingViewOptions != null) {
       optionMap.putIfAbsent(
@@ -66,6 +75,10 @@ class MethodChannelZoom extends ZoomPlatform {
     optionMap.putIfAbsent("disableShare", () => options.disableShare);
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
     optionMap.putIfAbsent("noAudio", () => options.noAudio);
+    if (options.disableInviteUrl != null) {
+      optionMap.putIfAbsent(
+          "disableInviteUrl", () => options.disableInviteUrl!.toString());
+    }
 
     if (options.meetingViewOptions != null) {
       optionMap.putIfAbsent(
