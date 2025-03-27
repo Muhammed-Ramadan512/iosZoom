@@ -180,9 +180,22 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.disableCall(in: parseBoolean(data: arguments["disableDialIn"]!, defaultValue: false))
             meetingSettings?.setAutoConnectInternetAudio(parseBoolean(data: arguments["noDisconnectAudio"]!, defaultValue: false))
             meetingSettings?.setMuteAudioWhenJoinMeeting(parseBoolean(data: arguments["noAudio"]!, defaultValue: false))
-            meetingSettings?.meetingShareHidden = parseBoolean(data: arguments["disableShare"]!, defaultValue: false)
-            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableDrive"]!, defaultValue: false)
+            meetingSettings?.meetingShareHidden = true
+            meetingSettings?.meetingInviteHidden = true 
+            meetingSettings?.meetingMoreHidden=true
+            meetingSettings?.meetingTitleHidden = true
+            meetingSettings?.meetingPasswordHidden = true
+            meetingSettings?.meetingInviteUrlHidden=true
+            
+
+            
             if  arguments["meetingViewOptions"] != nil{
+                meetingSettings?.meetingShareHidden = true
+                meetingSettings?.meetingInviteUrlHidden=true
+                meetingSettings?.meetingInviteHidden = true 
+                meetingSettings?.meetingMoreHidden=true
+                meetingSettings?.meetingTitleHidden = true
+                meetingSettings?.meetingPasswordHidden = true
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_AUDIO) != 0 {
                     meetingSettings?.meetingAudioHidden = true
@@ -258,9 +271,21 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.disableCall(in: parseBoolean(data: arguments["disableDialIn"]!, defaultValue: false))
             meetingSettings?.setAutoConnectInternetAudio(parseBoolean(data: arguments["noDisconnectAudio"]!, defaultValue: false))
             meetingSettings?.setMuteAudioWhenJoinMeeting(parseBoolean(data: arguments["noAudio"]!, defaultValue: false))
-            meetingSettings?.meetingShareHidden = parseBoolean(data: arguments["disableShare"]!, defaultValue: false)
-            meetingSettings?.meetingInviteHidden = parseBoolean(data: arguments["disableDrive"]!, defaultValue: false)
+            meetingSettings?.meetingShareHidden = true
+            meetingSettings?.meetingInviteHidden = true 
+           
+            meetingSettings?.meetingTitleHidden = true
+            meetingSettings?.meetingPasswordHidden = true
+            meetingSettings?.meetingInviteUrlHidden=true
+            
+            
             if  arguments["meetingViewOptions"] != nil{
+            meetingSettings?.meetingShareHidden = true
+            meetingSettings?.meetingInviteHidden = true 
+            meetingSettings?.meetingInviteUrlHidden=true
+            meetingSettings?.meetingMoreHidden=true
+            meetingSettings?.meetingTitleHidden = true
+            meetingSettings?.meetingPasswordHidden = true
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)   
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_AUDIO) != 0 {
                     meetingSettings?.meetingAudioHidden = true
