@@ -88,14 +88,14 @@ Future<void> checkAndDownloadSDK(String location) async {
         iosSimulateSDKFile);
   }
 
-  var androidRTCLibFile = location + '/android/libs/mobilertc.aar';
-  exists = await File(androidRTCLibFile).exists();
-  if (!exists) {
-    await downloadFile(
-        Uri.parse(
-            'https://com21-static.s3.sa-east-1.amazonaws.com/zoom/android/5.17.11/mobilertc.aar?dl=1'),
-        androidRTCLibFile);
-  }
+  // var androidRTCLibFile = location + '/android/libs/mobilertc.aar';
+  // exists = await File(androidRTCLibFile).exists();
+  // if (!exists) {
+  //   await downloadFile(
+  //       Uri.parse(
+  //           'https://com21-static.s3.sa-east-1.amazonaws.com/zoom/android/5.17.11/mobilertc.aar?dl=1'),
+  //       androidRTCLibFile);
+  // }
 }
 
 Future<void> downloadFile(Uri uri, String savePath) async {
