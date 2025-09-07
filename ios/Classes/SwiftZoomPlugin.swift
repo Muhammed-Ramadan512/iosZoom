@@ -216,7 +216,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
                     
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_VIDEO) != 0 {
-                    meetingSettings?.meetingVideoHidden = true
+                    meetingSettings?.meetingVideoHidden = false
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_TEXT_MEETING_ID) != 0 {
                     meetingSettings?.meetingTitleHidden = true
@@ -306,7 +306,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
                     
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_VIDEO) != 0 {
-                    meetingSettings?.meetingVideoHidden = true
+                    meetingSettings?.meetingVideoHidden = false
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_TEXT_MEETING_ID) != 0 {
                     meetingSettings?.meetingTitleHidden = true
