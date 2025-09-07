@@ -43,6 +43,7 @@ class MethodChannelZoom extends ZoomPlatform {
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
     optionMap.putIfAbsent("noAudio", () => options.noAudio);
     optionMap.putIfAbsent("meetingName", () => options.meetingName ?? "");
+    optionMap.putIfAbsent("customerKey", () => options.customerKey);
 
     if (options.meetingViewOptions != null) {
       optionMap.putIfAbsent(
@@ -66,6 +67,7 @@ class MethodChannelZoom extends ZoomPlatform {
     optionMap.putIfAbsent("disableShare", () => options.disableShare);
     optionMap.putIfAbsent("noDisconnectAudio", () => options.noDisconnectAudio);
     optionMap.putIfAbsent("noAudio", () => options.noAudio);
+    optionMap.putIfAbsent("customerKey", () => options.customerKey);
 
     if (options.meetingViewOptions != null) {
       optionMap.putIfAbsent(
