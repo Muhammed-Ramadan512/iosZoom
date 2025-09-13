@@ -193,7 +193,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
                 meetingSettings?.meetingShareHidden = true
                 meetingSettings?.meetingInviteUrlHidden=true
                 meetingSettings?.meetingInviteHidden = true 
-                meetingSettings?.meetingMoreHidden=true
+                meetingSettings?.meetingMoreHidden=false
                 meetingSettings?.meetingTitleHidden = true
                 meetingSettings?.meetingPasswordHidden = true
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)
@@ -204,7 +204,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
                     meetingSettings?.meetingLeaveHidden = true
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_MORE) != 0 {
-                    meetingSettings?.meetingMoreHidden = true
+                    meetingSettings?.meetingMoreHidden = false
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_PARTICIPANTS) != 0 {
                     meetingSettings?.meetingParticipantHidden = true
@@ -283,7 +283,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.meetingShareHidden = true
             meetingSettings?.meetingInviteHidden = true 
             meetingSettings?.meetingInviteUrlHidden=true
-            meetingSettings?.meetingMoreHidden=true
+            meetingSettings?.meetingMoreHidden=false
             meetingSettings?.meetingTitleHidden = true
             meetingSettings?.meetingPasswordHidden = true
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)   
@@ -294,7 +294,7 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
                     meetingSettings?.meetingLeaveHidden = true
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_MORE) != 0 {
-                    meetingSettings?.meetingMoreHidden = true
+                    meetingSettings?.meetingMoreHidden = false
                 }
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_PARTICIPANTS) != 0 {
                     meetingSettings?.meetingParticipantHidden = true
