@@ -186,6 +186,8 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.meetingTitleHidden = true
             meetingSettings?.meetingPasswordHidden = true
             meetingSettings?.meetingInviteUrlHidden=true
+            meetingSettings?.disableGalleryView(true)
+            meetingSettings?.meetingParticipantHidden = true        
             
 
             
@@ -196,6 +198,8 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
                 meetingSettings?.meetingMoreHidden=false
                 meetingSettings?.meetingTitleHidden = true
                 meetingSettings?.meetingPasswordHidden = true
+                meetingSettings?.disableGalleryView(true)
+                meetingSettings?.meetingParticipantHidden = true    
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_AUDIO) != 0 {
                     meetingSettings?.meetingAudioHidden = true
@@ -277,6 +281,9 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.meetingTitleHidden = true
             meetingSettings?.meetingPasswordHidden = true
             meetingSettings?.meetingInviteUrlHidden=true
+            meetingSettings?.disableGalleryView(true)
+            meetingSettings?.meetingParticipantHidden = true
+
             
             
             if  arguments["meetingViewOptions"] != nil{
@@ -286,6 +293,8 @@ public class SwiftZoomPlugin: NSObject, FlutterPlugin,FlutterStreamHandler , Mob
             meetingSettings?.meetingMoreHidden=false
             meetingSettings?.meetingTitleHidden = true
             meetingSettings?.meetingPasswordHidden = true
+            meetingSettings?.disableGalleryView(true)
+            meetingSettings?.meetingParticipantHidden = true    
                 let meetingViewOptions = parseInt(data: arguments["meetingViewOptions"]!, defaultValue: 0)   
                 if (meetingViewOptions & MeetingViewOptions.NO_BUTTON_AUDIO) != 0 {
                     meetingSettings?.meetingAudioHidden = true
